@@ -1,5 +1,6 @@
 import {AssetContainer, AssetsManager, SceneLoader, Sound, Vector3} from "@babylonjs/core";
 import "@babylonjs/loaders";
+import {assetUrl} from "./utils/assetUrl";
 
 export class GameAssetsManager {
 
@@ -17,52 +18,52 @@ export class GameAssetsManager {
   }
 
   loadSounds() {
-    this.sounds.levelStart = new Sound("levelStart", "/assets/sounds/level-start-sfx.wav", this.scene, () => {
+    this.sounds.levelStart = new Sound("levelStart", assetUrl("assets/sounds/level-start-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     });
 
-    this.sounds.lazer = new Sound("Lazer", "/assets/sounds/player-bullet-sfx.wav", this.scene, () => {
+    this.sounds.lazer = new Sound("Lazer", assetUrl("assets/sounds/player-bullet-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     });
 
-    this.sounds.alienMove = new Sound("alienMove", "/assets/sounds/alien-move-sfx.wav", this.scene, () => {
+    this.sounds.alienMove = new Sound("alienMove", assetUrl("assets/sounds/alien-move-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     });
 
-    this.sounds.alienBullet = new Sound("alienBullet", "/assets/sounds/alien-bullet-sfx.wav", this.scene, () => {
+    this.sounds.alienBullet = new Sound("alienBullet", assetUrl("assets/sounds/alien-bullet-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     });
 
-    this.sounds.clearLevel = new Sound("clearLevel", "/assets/sounds/clear-level-sfx.wav", this.scene, () => {
+    this.sounds.clearLevel = new Sound("clearLevel", assetUrl("assets/sounds/clear-level-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     });
 
-    this.sounds.motherShipExplosion = new Sound("motherShipExplosion", "/assets/sounds/mothership-explosion-sfx.wav", this.scene, () => {
+    this.sounds.motherShipExplosion = new Sound("motherShipExplosion", assetUrl("assets/sounds/mothership-explosion-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     });
 
-    this.sounds.playerExplosion = new Sound("playerExplosion", "/assets/sounds/player-explosion-sfx.wav", this.scene, () => {
+    this.sounds.playerExplosion = new Sound("playerExplosion", assetUrl("assets/sounds/player-explosion-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     });
 
-    this.sounds.alienExplosion = new Sound("alienExplosion", "/assets/sounds/alien-explosion-sfx.wav", this.scene, () => {
+    this.sounds.alienExplosion = new Sound("alienExplosion", assetUrl("assets/sounds/alien-explosion-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     })
 
-    this.sounds.gameOver = new Sound("gameOver", "/assets/sounds/game-over-sfx.wav", this.scene, () => {
+    this.sounds.gameOver = new Sound("gameOver", assetUrl("assets/sounds/game-over-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     });
 
-    this.sounds.motherShip = new Sound("motherShip", "/assets/sounds/mothership-sfx.wav", this.scene, () => {
+    this.sounds.motherShip = new Sound("motherShip", assetUrl("assets/sounds/mothership-sfx.wav"), this.scene, () => {
       this.assetsLoaded++;
       this.checkComplete();
     }, {
@@ -119,7 +120,7 @@ export class GameAssetsManager {
   }
 
   async loadAsset(file) {
-    let assets = await SceneLoader.ImportMeshAsync("", "/assets/models/", file, this.scene);
+    let assets = await SceneLoader.ImportMeshAsync("", assetUrl("assets/models/"), file, this.scene);
     return assets;
   }
 

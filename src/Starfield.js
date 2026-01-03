@@ -1,5 +1,6 @@
 import {Color4, Scalar, Sprite, SpriteManager} from "@babylonjs/core";
 import spaceinvadersConfig from "../spaceinvaders.config";
+import {assetUrl} from "./utils/assetUrl";
 
 export class Starfield {
 
@@ -29,11 +30,23 @@ export class Starfield {
     if (spaceinvadersConfig.actionCam) this.speed *= 2;
 
     if (spaceinvadersConfig.oldSchoolEffects.enabled && spaceinvadersConfig.oldSchoolEffects.blurIntensity > 0.2) {
-      this.spriteManager = new SpriteManager("starsManager", "/assets/images/star_glow.png", 1000, {width: 384, height: 384}, this.scene);
+      this.spriteManager = new SpriteManager(
+        "starsManager",
+        assetUrl("assets/images/star_glow.png"),
+        1000,
+        {width: 384, height: 384},
+        this.scene
+      );
       this.minSize *= 3;
       this.maxSize *= 3;
     } else {
-      this.spriteManager = new SpriteManager("starsManager", "/assets/images/star.png", 1000, {width: 128, height: 128}, this.scene);
+      this.spriteManager = new SpriteManager(
+        "starsManager",
+        assetUrl("assets/images/star.png"),
+        1000,
+        {width: 128, height: 128},
+        this.scene
+      );
     }
 
     this.createStarField();
