@@ -10,6 +10,7 @@ export class GameGUI {
   textLevel;
   textLives;
   textHigh;
+  textMissile;
   textScale = 1;
 
   constructor() {
@@ -70,6 +71,16 @@ export class GameGUI {
     this.textHigh.top = 40;
     this.texture.addControl(this.textHigh);
 
+    // Missile availability
+    this.textMissile = new TextBlock();
+    this.textMissile.color = "white";
+    this.textMissile.fontSize = fontSize;
+    this.textMissile.fontFamily = '"Press Start 2P"';
+    this.textMissile.textVerticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
+    this.textMissile.textHorizontalAlignment = Control.HORIZONTAL_ALIGNMENT_CENTER;
+    this.textMissile.top = -40;
+    this.texture.addControl(this.textMissile);
+
   }
 
   update() {
@@ -77,6 +88,8 @@ export class GameGUI {
     this.textLevel.text = "LEVEL:" + State.level;
     this.textLives.text = "LIVES:" + Math.max(0,State.lives);
     this.textHigh.text = "HIGH:" + (window.localStorage.getItem('highScore') ?? 0);
+    this.textMissile.text = State.missileAvailable ? "MISSILE: READY" : "MISSILE: USED";
+    this.textMissile.color = State.missileAvailable ? "#00FF00" : "#FF0000";
   }
 
   getCanvasSize() {
@@ -92,6 +105,7 @@ export class GameGUI {
     this.textLives.fontSize = fontSize;
     this.textLevel.fontSize = fontSize;
     this.textHigh.fontSize = fontSize;
+    this.textMissile.fontSize = fontSize;
     this.textScore.left = -spacing * 3;
     this.textLevel.left = -spacing;
     this.textLives.left = spacing;

@@ -1,5 +1,6 @@
 import {Scalar, Vector3} from "@babylonjs/core";
 import {PlayerBullet} from "./PlayerBullet";
+import {GuidedMissile} from "./GuidedMissile";
 import {InputController} from "./InputController";
 import {Explosion} from "./Explosion";
 import {MobileInputs} from "./MobileInputs";
@@ -19,6 +20,16 @@ export class PlayerController {
     this.maxBullets = 50;
     this.momentum = 0;
     this.isInvincible = false;
+    this.missiles = [];
+    this.alienFormationController = null;
+  }
+
+  setAlienFormationController(alienFormationController) {
+    this.alienFormationController = alienFormationController;
+  }
+
+  resetMissile() {
+    State.missileAvailable = true;
   }
 
   initPlayer() {
@@ -115,6 +126,14 @@ export class PlayerController {
       }
       i++;
     }
+    // Also cleanup missiles
+    i = 0;
+    for (let missile of this.missiles) {
+      if (missile.disposed) {
+        this.missiles.splice(i, 1);
+      }
+      i++;
+    }
   }
 
   hidePlayer() {
@@ -160,6 +179,17 @@ export class PlayerController {
       }
     } else {
       this.fireKeyDown = false;
+    }
+    // Guided missile with 'm' key
+    if (input.m || input.control) {
+      if (!this.missileKeyDown && State.missileAvailable && this.movementEnabled && this.alienFormationController) {
+        this.missiles.push(new GuidedMissile(this.gameAssets, this.scene, this.playerMesh, this.alienFormationController));
+        this.gameAssets.sounds.lazer.play();
+        State.missileAvailable = false;
+        this.missileKeyDown = true;
+      }
+    } else {
+      this.missileKeyDown = false;
     }
     this.playerMove();
   }

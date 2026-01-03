@@ -69,6 +69,8 @@ export class GameController {
     State.level += 1;
     this.playerController.movementEnabled = false;
     this.buildAliensFormation();
+    this.playerController.setAlienFormationController(this.alienFormation);
+    this.playerController.resetMissile();
     this.playerController.initPlayer();
     State.state = "GAMELOOP";
     this.gameAssets.sounds.levelStart.play();
